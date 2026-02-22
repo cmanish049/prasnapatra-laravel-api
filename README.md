@@ -1,59 +1,271 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Prasnapatra API
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Prasnapatra API is a Laravel 12 REST API built with modern best practices and essential configurations for reliable, production-grade applications.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Framework**: Laravel 12
+- **Language**: PHP 8.5+
+- **Database**: SQLite (development), MySQL/PostgreSQL (production)
+- **Authentication**: Laravel Sanctum
+- **Testing**: Pest 4
+- **Code Quality**: 
+  - Larastan (Static Analysis)
+  - PHP Pint (Formatting)
+  - Rector (Automated Refactoring)
+- **Frontend Bundling**: Vite
+- **CSS**: Tailwind CSS v4
 
-## Learning Laravel
+## Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- ✅ **Strict Eloquent Models** - Prevents lazy loading, attribute discarding, and missing attribute access in development
+- ✅ **Immutable Dates** - Uses CarbonImmutable for date handling
+- ✅ **Destructive Command Protection** - Blocks dangerous commands in production
+- ✅ **API Authentication** - Laravel Sanctum for token-based authentication
+- ✅ **Database Migrations** - Clean migrations for users and personal access tokens
+- ✅ **Comprehensive Testing** - Pest testing framework with factories and seeders
+- ✅ **Code Quality Tools** - Static analysis, formatting, and automated refactoring
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Requirements
 
-## Laravel Sponsors
+- PHP 8.5 or higher
+- Composer
+- Node.js & npm
+- Laravel Herd (for local development)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Installation
 
-### Premium Partners
+### 1. Clone and Setup
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+composer install
+npm install
+```
+
+### 2. Generate Application Key
+
+```bash
+composer run setup
+```
+
+This command will:
+- Install dependencies
+- Create `.env` file
+- Generate application key
+- Run database migrations
+- Build frontend assets
+
+### 3. Running Locally
+
+```bash
+composer run dev
+```
+
+This starts:
+- Laravel development server
+- Vite asset bundler
+- Queue listener
+- Application logs
+
+## API Documentation
+
+### Authentication
+
+All API endpoints (except `/api/register` and `/api/login`) require authentication via Bearer token:
+
+```http
+Authorization: Bearer {token}
+```
+
+Obtain tokens via Sanctum authentication endpoints.
+
+### Available Routes
+
+Routes are defined in:
+- `routes/api.php` - API endpoints
+- `routes/web.php` - Web-facing routes
+- `routes/console.php` - Artisan commands
+
+## Development
+
+### Code Quality
+
+Run code quality tools before committing:
+
+```bash
+# Format code (automatically fixes issues)
+composer run pint
+
+# Check formatting without changes (dry-run)
+composer run pint:check
+
+# Format only changed files
+composer run pint:dirty
+
+# Static analysis
+composer run larastan
+
+# Automated refactoring
+composer run rector
+```
+
+### Testing
+
+Run the test suite:
+
+```bash
+composer run test
+```
+
+Run specific tests:
+
+```bash
+php artisan test --filter=TestName
+```
+
+## Database
+
+### Migrations
+
+Run migrations:
+
+```bash
+php artisan migrate
+```
+
+Create a new migration:
+
+```bash
+php artisan make:migration create_table_name
+```
+
+### Seeders
+
+Seed the database:
+
+```bash
+php artisan db:seed
+```
+
+## Project Structure
+
+```
+├── app/
+│   ├── Http/Controllers/    # API controllers
+│   ├── Models/              # Eloquent models
+│   └── Providers/           # Service providers
+├── database/
+│   ├── migrations/          # Database migrations
+│   ├── factories/           # Model factories
+│   └── seeders/             # Database seeders
+├── routes/
+│   ├── api.php              # API routes
+│   ├── web.php              # Web routes
+│   └── console.php          # Console commands
+├── config/                  # Configuration files
+├── tests/                   # Test suite (Pest)
+└── storage/                 # Application storage
+```
+
+## Configuration
+
+### Environment Variables
+
+Key environment variables in `.env`:
+
+```
+APP_NAME=Prasnapatra
+APP_ENV=local|production
+APP_DEBUG=true|false
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=sqlite|mysql
+DB_DATABASE=database.sqlite
+
+SANCTUM_STATEFUL_DOMAINS=localhost
+
+QUEUE_CONNECTION=sync|redis
+```
+
+See `config/` directory for detailed configuration options.
+
+## Deployment
+
+### Production Checklist
+
+1. Set application to production mode:
+   ```bash
+   APP_ENV=production
+   APP_DEBUG=false
+   ```
+
+2. Generate application key (if not done):
+   ```bash
+   php artisan key:generate
+   ```
+
+3. Run migrations:
+   ```bash
+   php artisan migrate --force
+   ```
+
+4. Cache configuration, routes, and views:
+   ```bash
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   ```
+
+5. Install production dependencies:
+   ```bash
+   composer install --no-dev --optimize-autoloader
+   npm run build
+   ```
+
+## Debugging
+
+### Tinker Console
+
+Access Laravel Tinker for interactive debugging:
+
+```bash
+php artisan tinker
+```
+
+### Logs
+
+Application logs are stored in `storage/logs/`. View recent logs:
+
+```bash
+tail -f storage/logs/laravel.log
+```
+
+### Debugbar
+
+In development, the Laravel Debugbar is available at the bottom of each page, showing queries, timing, and more.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+We welcome contributions! Please read our contribution guidelines before submitting pull requests.
 
-## Code of Conduct
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Security
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability, please email [security@example.com](mailto:security@example.com) instead of using the issue tracker.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Prasnapatra API is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
