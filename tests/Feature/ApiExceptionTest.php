@@ -56,7 +56,7 @@ describe('API exceptions', function (): void {
     })->with('apiExceptionDetails');
 });
 
-dataset('apiExceptionDefaults', fn(): array => [
+dataset('apiExceptionDefaults', fn (): array => [
     'conflict' => [
         ConflictApiException::class,
         'CONFLICT',
@@ -95,7 +95,7 @@ dataset('apiExceptionDefaults', fn(): array => [
     ],
 ]);
 
-dataset('apiExceptionDetails', fn(): array => [
+dataset('apiExceptionDetails', fn (): array => [
     'conflict' => [
         ConflictApiException::class,
         'CONFLICT',
