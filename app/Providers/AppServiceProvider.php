@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Override;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
@@ -14,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
-    #[\Override]
+    #[Override]
     public function register(): void
     {
         //
